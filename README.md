@@ -6,8 +6,8 @@ Web scraping discord bot showing spread of the new coronavirus.
 git clone https://github.com/dada513/coronavirus-discord-bot.git
 cd coronavirus-discord-bot
 npm i
-code .env # open .env file in vscode
-npm run devStart # Run for development
+code .env
+npm run devStart
 ```
 
 ## Commands
