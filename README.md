@@ -10,6 +10,9 @@ code .env # open .env file in vscode
 npm run devStart # Run for development
 ```
 
+## Commands
+`cov!info` - Show stats of the virus
+
 ## .env
 You need to create a `.env` file with `token` value to run the bot.
 The token is a bot token obtained from [Discord Developers](https://discordapp.com/developers/applications/)
