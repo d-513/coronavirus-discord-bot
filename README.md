@@ -1,5 +1,6 @@
 # CoronaVirus bot
 Web scraping discord bot showing spread of the new coronavirus.
+You can invite the version I am hosting [here](https://discordapp.com/api/oauth2/authorize?client_id=683928960471793691&permissions=2048&scope=bot)
 
 ## Running
 ```
