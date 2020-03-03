@@ -26,11 +26,11 @@ let getData = async () => {
   }, 5000);
 };
 
-setInterval(() => getData(), 3600000) // one hour interval
+setInterval(() => getData(), 3600000); // one hour interval
 
 client.once("ready", async () => {
   console.log("THE BOT HAS STARTED");
-  client.user.setActivity("Plague Inc || cov!info");
+  client.user.setActivity(`cov!info | ${client.guilds.cache.size} guilds`);
   getData();
 });
 client.on("message", async message => {
