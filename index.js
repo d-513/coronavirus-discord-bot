@@ -30,9 +30,14 @@ setInterval(() => getData(), 3600000); // one hour interval
 let guilds = [];
 client.once("ready", async () => {
   console.log("THE BOT HAS STARTED");
-  client.user.setActivity(`cov!info | ${client.guilds.cache.size} guilds`);
   getData();
   client.guilds.cache.forEach(guild => guilds.push(guild.name));
+  client.user.setActivity(`cov!info | ${client.guilds.cache.size} guilds`);
+  setInterval(() => {
+    guilds = []
+    client.guilds.cache.forEach(guild => guilds.push(guild.name));
+    client.user.setActivity(`cov!info | ${client.guilds.cache.size} guilds`);
+  }, 1800000)
 });
 client.on("message", async message => {
   let content = message.content;
@@ -46,7 +51,7 @@ client.on("message", async message => {
         return;
       }
       message.channel.send(
-        `**Total infected** \n${data.infected}\n\n**Total Recovered** \n${data.recovered}\n\n**Total dead** \n${data.dead}`
+        `**Total infected** \n${data.infected}\n\n**Total Recovered** \n${data.recovered}\n\n**Total dead** \n${data.dead}\n \`\`\`data from https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6 \`\`\``
       );
     }
     if (cmd === "guilds") {
