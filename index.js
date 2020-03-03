@@ -27,11 +27,12 @@ let getData = async () => {
 };
 
 setInterval(() => getData(), 3600000); // one hour interval
-
+let guilds = [];
 client.once("ready", async () => {
   console.log("THE BOT HAS STARTED");
   client.user.setActivity(`cov!info | ${client.guilds.cache.size} guilds`);
   getData();
+  client.guilds.cache.forEach(guild => guilds.push(guild.name));
 });
 client.on("message", async message => {
   let content = message.content;
@@ -47,6 +48,16 @@ client.on("message", async message => {
       message.channel.send(
         `**Total infected** \n${data.infected}\n\n**Total Recovered** \n${data.recovered}\n\n**Total dead** \n${data.dead}`
       );
+    }
+    if (cmd === "guilds") {
+      if (message.author.id === process.env.AUTHOR) {
+        let msg = "Guilds: \n```";
+        guilds.forEach(guild => (msg += `${guild}, `));
+        msg += "```";
+        message.channel.send(msg);
+      } else {
+        message.channel.send("Bot-owner only command!");
+      }
     }
   }
 });
