@@ -32,6 +32,7 @@ client.once("ready", async () => {
   console.log("THE BOT HAS STARTED");
   getData();
   client.guilds.cache.forEach(guild => guilds.push(guild.name));
+  client.user.setStatus("idle");
   client.user.setActivity(`cov!info | ${client.guilds.cache.size} guilds`);
   setInterval(() => {
     guilds = [];
