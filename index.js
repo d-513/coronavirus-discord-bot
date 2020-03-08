@@ -27,16 +27,12 @@ let getData = async () => {
 };
 
 setInterval(() => getData(), 3600000); // one hour interval
-let guilds = [];
 client.once("ready", async () => {
   console.log("THE BOT HAS STARTED");
   getData();
-  client.guilds.cache.forEach(guild => guilds.push(guild.name));
   client.user.setStatus("idle");
   client.user.setActivity(`cov!info | ${client.guilds.cache.size} guilds`);
   setInterval(() => {
-    guilds = [];
-    client.guilds.cache.forEach(guild => guilds.push(guild.name));
     client.user.setActivity(`cov!info | ${client.guilds.cache.size} guilds`);
   }, 1800000);
 });
@@ -58,7 +54,7 @@ client.on("message", async message => {
     if (cmd === "guilds") {
       if (message.author.id === process.env.AUTHOR) {
         let msg = "Guilds: \n```";
-        guilds.forEach(guild => (msg += `${guild}, `));
+        client.guilds.cache.forEach(guild => (msg += `${guild}, `));
         msg += "```";
         message.channel.send(msg);
       } else {
