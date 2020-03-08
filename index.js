@@ -32,11 +32,11 @@ client.once("ready", async () => {
   console.log("THE BOT HAS STARTED");
   getData();
   client.guilds.cache.forEach(guild => guilds.push(guild.name));
-  client.user.setStatus(`cov!info | ${client.guilds.cache.size} guilds`);
+  client.user.setActivity(`cov!info | ${client.guilds.cache.size} guilds`);
   setInterval(() => {
     guilds = [];
     client.guilds.cache.forEach(guild => guilds.push(guild.name));
-    client.user.setStatus(`cov!info | ${client.guilds.cache.size} guilds`);
+    client.user.setActivity(`cov!info | ${client.guilds.cache.size} guilds`);
   }, 1800000);
 });
 client.on("message", async message => {
