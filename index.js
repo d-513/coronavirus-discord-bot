@@ -16,10 +16,10 @@ let getData = async () => {
       () => document.querySelectorAll("text")[1].textContent
     );
     text.dead = await page.evaluate(
-      () => document.querySelectorAll("text")[5].textContent
+      () => document.querySelectorAll("text")[7].textContent
     );
     text.recovered = await page.evaluate(
-      () => document.querySelectorAll("text")[7].textContent
+      () => document.querySelectorAll("text")[5].textContent
     );
     browser.close();
     data = text;
@@ -34,10 +34,10 @@ client.once("ready", async () => {
   client.guilds.cache.forEach(guild => guilds.push(guild.name));
   client.user.setActivity(`cov!info | ${client.guilds.cache.size} guilds`);
   setInterval(() => {
-    guilds = []
+    guilds = [];
     client.guilds.cache.forEach(guild => guilds.push(guild.name));
     client.user.setActivity(`cov!info | ${client.guilds.cache.size} guilds`);
-  }, 1800000)
+  }, 1800000);
 });
 client.on("message", async message => {
   let content = message.content;
