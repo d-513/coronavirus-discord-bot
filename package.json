@@ -1,0 +1,25 @@
+{
+  "name": "cov-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon .",
+    "postinstall": "patch-package"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "country-emoji": "^1.5.0",
+    "dblapi.js": "^2.4.0",
+    "discord.js": "^12.0.2",
+    "discord.js-commando": "github:discordjs/Commando",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2",
+    "patch-package": "^6.2.1"
+  }
+}
