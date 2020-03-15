@@ -35,7 +35,7 @@ module.exports = class RegionInfoCommand extends Command {
       let embed = new MessageEmbed()
         .setTitle("Coronavirus regional stats")
         .setDescription(
-          "Use `cov!regioninfo list` to view a list of affected countries and `cov!regioninfo <countryname>` to view information about a country."
+          "Use `cov!regioninfo list` to view a list of affected countries and `cov!regioninfo <countryname>` to view information about a country. This list only contains 25 most infected countries."
         )
         .setURL(
           "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public"
@@ -44,8 +44,16 @@ module.exports = class RegionInfoCommand extends Command {
           "CoronaVirus",
           "https://i.ya-webdesign.com/images/biohazard-transparent-plague-inc.png"
         )
-        .setColor("#FF0000");
+        .setColor("#FF0000")
+        .setFooter(
+          `Top 25 countries. Read above for more info about this command.`
+        );
+      let i = 0;
       for (let [key, value] of Object.entries(response.data.countries[0])) {
+        i++;
+        if (i >= 25) {
+          break; // Limit fields so that discord doesn't complain about a too big embed.
+        }
         let name = key.replace(/_/g, " ");
         if (name === "Cruise Ship") {
           name = `⛵ Cruise Ship\n`;
