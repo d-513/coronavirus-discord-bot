@@ -60,10 +60,10 @@ module.exports = class RegionInfoCommand extends Command {
         let name = key.replace(/_/g, " ");
         // custom filters for stuff not included in country-emoji
         if (name === "Cruise Ship") {
-          m += `⛵ Cruise Ship\n`;
+          name = `⛵ Cruise Ship\n`;
           return;
         } else if (name === "Cabo Verde") {
-          m += `🇨🇻 Cabo Verde\n`;
+          name = `🇨🇻 Cabo Verde\n`;
           return;
         }
         embed.addField(
@@ -144,10 +144,10 @@ module.exports = class RegionInfoCommand extends Command {
       let name = key.replace(/_/g, " ");
       // custom filters for stuff not included in country-emoji
       if (name === "Cruise Ship") {
-        m += `⛵ Cruise Ship\n`;
+        name = `⛵ Cruise Ship\n`;
         return;
       } else if (name === "Cabo Verde") {
-        m += `🇨🇻 Cabo Verde\n`;
+        name = `🇨🇻 Cabo Verde\n`;
         return;
       }
       let embed = new MessageEmbed()
