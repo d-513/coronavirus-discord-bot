@@ -2,6 +2,9 @@ const { Command } = require("discord.js-commando");
 const { get } = require("axios");
 const { MessageEmbed } = require("discord.js");
 const { flag } = require("country-emoji");
+const embedTemplate = desc => {
+  return new MessageEmbed().setDescription(desc).setColor("#FF0000");
+};
 module.exports = class RegionInfoCommand extends Command {
   constructor(client) {
     super(client, {
@@ -55,8 +58,13 @@ module.exports = class RegionInfoCommand extends Command {
           break; // Limit fields so that discord doesn't complain about a too big embed.
         }
         let name = key.replace(/_/g, " ");
+        // custom filters for stuff not included in country-emoji
         if (name === "Cruise Ship") {
-          name = `⛵ Cruise Ship\n`;
+          m += `⛵ Cruise Ship\n`;
+          return;
+        } else if (name === "Cabo Verde") {
+          m += `🇨🇻 Cabo Verde\n`;
+          return;
         }
         embed.addField(
           `${flag(name) || ""} ${name}`,
@@ -68,8 +76,6 @@ module.exports = class RegionInfoCommand extends Command {
     } else if (country === "list") {
       let msg = await message.say("Loading...");
       let response = await get("https://covid2019-api.herokuapp.com/countries");
-      let desc =
-        "Use `cov!regioninfo <country_name>` to view detailed information about a country\n\n";
       const embed = new MessageEmbed()
         .setTitle(`Coronavirus regional stats - Affected countries`)
         .setURL(
@@ -80,17 +86,34 @@ module.exports = class RegionInfoCommand extends Command {
           "https://i.ya-webdesign.com/images/biohazard-transparent-plague-inc.png"
         )
         .setColor("#FF0000")
+        .setDescription(
+          "Use cov!regioninfo country_name to view specific information about a country."
+        )
         .setFooter("Affected countries");
+      let m = "";
+      let i = 0;
+      await msg.edit("", embed);
       response.data.countries.forEach(country => {
+        i++;
+        if (i > 100) {
+          i = 0;
+          message.embed(embedTemplate(m));
+          m = "";
+        }
         let name = country.replace(/_/g, " ");
+        // custom filters for stuff not included in country-emoji
         if (name === "Cruise Ship") {
-          desc += `⛵ Cruise Ship\n`;
+          m += `⛵ Cruise Ship\n`;
+          return;
+        } else if (name === "Cabo Verde") {
+          m += `🇨🇻 Cabo Verde\n`;
           return;
         }
-        desc += `${flag(name) || ""} ${name}\n`;
+        m += `${flag(name) || ""} ${name}\n`;
       });
-      embed.setDescription(desc);
-      return await msg.edit("", embed);
+      if (m.length > 0) {
+        message.embed(embedTemplate(m));
+      }
     } else {
       let msg = await message.say("Loading...");
       let response;
@@ -119,8 +142,12 @@ module.exports = class RegionInfoCommand extends Command {
       }
       let key = Object.keys(data)[0];
       let name = key.replace(/_/g, " ");
+      // custom filters for stuff not included in country-emoji
       if (name === "Cruise Ship") {
-        name = "⛵ Cruise Ship";
+        m += `⛵ Cruise Ship\n`;
+        return;
+      } else if (name === "Cabo Verde") {
+        m += `🇨🇻 Cabo Verde\n`;
         return;
       }
       let embed = new MessageEmbed()
