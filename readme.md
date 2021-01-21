@@ -1,3 +1,5 @@
+# THIS IS ABANDONED
+
 The legacy branch contains the old code that scraped the coronavirus tracker to get the data. I switched to using an api because of site downtime (https://github.com/CSSEGISandData/COVID-19/issues/581) and frequent changing of the layout.
 # CoronaVirus bot
 
